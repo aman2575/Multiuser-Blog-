@@ -3,21 +3,25 @@ import { API, Storage } from 'aws-amplify'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import ReactMarkdown from 'react-markdown'
+import Image from 'next/image'
 import { listPosts, getPost } from '../../src/graphql/queries'
 
 export default function Post({ post }) {
   const [coverImage, setCoverImage] = useState(null)
-  useEffect(() => {
-    updateCoverImage()
-  }, [])
+  const router = useRouter()
+
+  
   async function updateCoverImage() {
     if (post.coverImage) {
       const imageKey = await Storage.get(post.coverImage)
       setCoverImage(imageKey)
     }
   }
-  console.log('post: ', post)
-  const router = useRouter()
+
+  useEffect(() => {
+    updateCoverImage()
+  }, [])
+  
   if (router.isFallback) {
     return <div>Loading...</div>
   }
@@ -25,11 +29,16 @@ export default function Post({ post }) {
     <div>
       <h1 className="text-5xl mt-4 font-semibold tracking-wide">{post.title}</h1>
       {
-        coverImage && <img src={coverImage} className="mt-4" />
+        coverImage && <Image src={coverImage} className="mt-4"  alt="Landscape picture"
+        width={500}
+        height={500} />
       }
       <p className="text-sm font-light my-4">by {post.username}</p>
-      <div className="mt-8">
-        <ReactMarkdown className='prose' children={post.content} />
+      <div className="mt-8" >
+        {/* <ReactMarkdown className='prose' children={post.content}/>
+        
+        */}
+        <p className="text-sm font-light my-4"> {post.content}</p>
       </div>
     </div>
   )

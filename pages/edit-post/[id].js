@@ -2,11 +2,12 @@
 import { useEffect, useState, useRef } from 'react'
 import { API, Storage } from 'aws-amplify'
 import { useRouter } from 'next/router'
-import SimpleMDE from "react-simplemde-editor"
-import "easymde/dist/easymde.min.css"
+import  SimpleMDE  from "react-simplemde-editor";
+import "easymde/dist/simplemde.min.css";
 import { v4 as uuid } from 'uuid'
 import { updatePost } from '../../src/graphql/mutations'
 import { getPost } from '../../src/graphql/queries'
+import Image from 'next/image'
 
 function EditPost() {
   const [post, setPost] = useState(null)
@@ -69,7 +70,9 @@ function EditPost() {
     <div>
       <h1 className="text-3xl font-semibold tracking-wide mt-6 mb-2">Edit post</h1>
       {
-        coverImage && <img src={localImage ? localImage : coverImage} className="mt-4" />
+        coverImage && <Image src={localImage ? localImage : coverImage} className="mt-4" alt="blog picture"
+        width={500}
+        height={500} />
       }
       <input
         onChange={onChange}
@@ -78,7 +81,7 @@ function EditPost() {
         value={post.title}
         className="border-b pb-2 text-lg my-4 focus:outline-none w-full font-light text-gray-500 placeholder-gray-500 y-2"
       /> 
-      <SimpleMDE value={post.content} onChange={value => setPost({ ...post, content: value })} />
+      <SimpleMdeReact value={post.content} onChange={value => setPost({ ...post, content: value })} />
       <input
         type="file"
         ref={fileInput}
