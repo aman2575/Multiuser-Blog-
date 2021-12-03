@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "amplifynext",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/home/neo/Desktop/React/amplifynext/amplify/backend/api/amplifynext/schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 49,
+      "apiKeyExpirationDate": "2022-01-20T11:58:46.616Z",
+      "keyDescription": "public"
+    },
+    "conflictResolution": {},
+    "additionalAuthTypes": [
+      {
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authamplifynext93d15ae7"
+      }
+    ]
+  }
+}
