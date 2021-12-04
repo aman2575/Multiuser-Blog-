@@ -1,11 +1,10 @@
 // pages/create-post.js.
-import { withAuthenticator } from '@aws-amplify/ui-react'
-import { useState, useRef } from 'react' // new
+import { withAuthenticator } from '@aws-amplify/ui-react-v1'
+import { useState, useRef } from 'react'
 import { API, Storage } from 'aws-amplify'
 import { v4 as uuid } from 'uuid'
 import { useRouter } from 'next/router'
-import SimpleMDE from "react-simplemde-editor"
-import "easymde/dist/easymde.min.css"
+import dynamic from "next/dynamic"
 import { createPost } from '../src/graphql/mutations'
 import Image from 'next/image'
 
@@ -63,7 +62,11 @@ function CreatePost() {
           height={500}/>
         )
       }
-      <SimpleMDE value={post.content} onChange={value => setPost({ ...post, content: value })} />
+      {/* <SimpleMdeReact value={post.content} onChange={value => setPost({ ...post, content: value })} /> */}
+      <SimpleMdeEditor 
+        value={post.content}
+        onChange={value => setPost({ ...post, content: value })}
+/>
       <input
         type="file"
         ref={hiddenFileInput}

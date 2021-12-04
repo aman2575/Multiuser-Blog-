@@ -2,8 +2,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { API, Storage } from 'aws-amplify'
 import { useRouter } from 'next/router'
-import  SimpleMDE  from "react-simplemde-editor";
-import "easymde/dist/simplemde.min.css";
+import dynamic from "next/dynamic"
 import { v4 as uuid } from 'uuid'
 import { updatePost } from '../../src/graphql/mutations'
 import { getPost } from '../../src/graphql/queries'
@@ -81,7 +80,11 @@ function EditPost() {
         value={post.title}
         className="border-b pb-2 text-lg my-4 focus:outline-none w-full font-light text-gray-500 placeholder-gray-500 y-2"
       /> 
-      <SimpleMdeReact value={post.content} onChange={value => setPost({ ...post, content: value })} />
+    {/*   <SimpleMdeReact value={post.content} onChange={value => setPost({ ...post, content: value })} /> */}
+      <SimpleMdeEditor 
+        value={post.content}
+        onChange={value => setPost({ ...post, content: value })}
+/>
       <input
         type="file"
         ref={fileInput}
