@@ -1,5 +1,5 @@
 // pages/create-post.js.
-import { withAuthenticator } from '@aws-amplify/ui-react-v1'
+import { withAuthenticator } from '@aws-amplify/ui-react'
 import { useState, useRef } from 'react'
 import { API, Storage } from 'aws-amplify'
 import { v4 as uuid } from 'uuid'
